@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>shed</Name>
+  <Repository>ghcr.io/jlyfshhh/shed:latest</Repository>
+  <Registry>https://ghcr.io/jlyfshhh/shed</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://forums.unraid.net/</Support>
+  <Project>https://animalroom.app</Project>
+  <Overview>Shed is an animal husbandry management application for tracking feedings, weights, sheds, and health records for reptiles and exotic pets.</Overview>
+  <Category>Productivity: Tools: Other:</Category>
+  <WebUI>http://[IP]:[PORT:3000]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/unraid-templates/main/plugins/shed.xml</TemplateURL>
+  <Icon>https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/72x72/1f33f.png</Icon>
+  <ExtraParams>--init --read-only --cap-drop=ALL --security-opt no-new-privileges:true --user 99:100 --stop-timeout 30 --pids-limit 256 --cpus 2.0 --mount type=tmpfs,destination=/app/dist/server/.wrangler,tmpfs-size=134217728,tmpfs-mode=0777 --mount type=tmpfs,destination=/tmp,tmpfs-size=134217728,tmpfs-mode=1777</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Web UI Port" Target="3000" Default="3000" Mode="tcp" Description="The host port used to access the Shed web interface." Type="Port" Display="always" Required="true" Mask="false">3000</Config>
+  <Config Name="Appdata Storage" Target="/data" Default="/mnt/user/appdata/shed/data" Mode="rw" Description="Container path where SQLite database, Miniflare state, and uploaded media are stored." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/shed/data</Config>
+  <Config Name="Bootstrap Token (Head Keeper Key)" Target="SHED_BOOTSTRAP_TOKEN" Default="" Description="Initial setup token used to claim the instance and log in as the administrator. Generate a 48-character hex string (e.g. via 'openssl rand -hex 24')." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Display Token" Target="SHED_DISPLAY_TOKEN" Default="" Description="Token used for public or room display views. Generate a separate 48-character hex string." Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="PUID" Target="SHED_UID" Default="99" Description="User ID for file ownership (99 is Unraid nobody)." Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="SHED_GID" Default="100" Description="Group ID for file ownership (100 is Unraid users)." Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+  <Config Name="Internal Port" Target="SHED_PORT" Default="3000" Description="Port the internal service binds to." Type="Variable" Display="advanced" Required="true" Mask="false">3000</Config>
+  <Config Name="Auth Required" Target="SHED_AUTH_REQUIRED" Default="true" Description="Enforces authentication." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Allow External Paths" Target="SHED_ALLOW_EXTERNAL_PATHS" Default="true" Description="Permits volume mounts outside the app root." Type="Variable" Display="advanced" Required="true" Mask="false">true</Config>
+  <Config Name="Internal Data Path" Target="SHED_DATA_PATH" Default="/data" Description="Internal mount path for data storage." Type="Variable" Display="advanced" Required="true" Mask="false">/data</Config>
+</Container>
